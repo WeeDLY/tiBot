@@ -138,7 +138,7 @@ def parse_arguments():
     read_settings(args.settings)
 
 def read_settings(settingsFile):
-    global twitterName, database, logFolder
+    global twitterName, database, logFolder, connection
 
     if os.path.isfile(settingsFile) is False:
         print('%s does not exist. Exiting' % settingsFile)
@@ -149,7 +149,7 @@ def read_settings(settingsFile):
         twitterName = data["twitterName"]
         database = data["database"]
         logFolder = data["logFolder"]
-        sqlite3.connect(database, check_same_thread=False)
+        connection = sqlite3.connect(database, check_same_thread=False)
         print('Loaded settings')
     except Exception as e:
         print(e)
