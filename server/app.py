@@ -145,7 +145,7 @@ def read_settings(settingsFile):
         exit()
     try:
         settingsData = open(settingsFile)
-        data = json.loads(settingsData)
+        data = json.load(settingsData)
         twitterName = data["twitterName"]
         database = data["database"]
         logFolder = data["logFolder"]
