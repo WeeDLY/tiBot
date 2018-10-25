@@ -1,0 +1,5 @@
+{
+    "twitterName":"twitterName",
+    "database":"tiBot.db",
+    "logFolder":"tiBot/logs"
+}

@@ -1,0 +1,71 @@
+<html lang="en">
+    <head>
+        <script src='static/Chart.min.js'></script>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="../static/main_style.css" />
+        <style>
+            #file-overview{
+                align-content: center;
+                align-self: center;
+                float: left;
+                border: solid 1px #4cdef5;
+                height: 70%;
+                width: 18%;
+                margin-left: 8px;
+                color:#f7ef6a;
+            }
+            h4{
+                text-align: center;
+            }
+            #text-content{
+                align-content: center;
+                align-self: center;
+                padding: 1%;
+                border: solid 1px #4cdef5;
+                height: 70%;
+                width: 80%;
+                color:#f7ef6a;
+                background-color: #1d2731;
+                overflow: auto;
+                float:right;
+                margin-right: 8px;
+            }
+            table{
+                align-content: center;
+                align-self: center;
+                margin: auto;
+                color:#f7ef6a;
+            }
+            th{
+                color: #f7882f;
+            }
+            </style>
+    </head>
+    <body>
+        <h1>tiBot @{{twitterName}}</h1>
+        <div id="menu-container">
+            <a href="/" class="flexItems">Home</a>
+            <a href="/query" class="flexItems">Query</a>
+            <a href="/debug" class="flexItems">Debug</a>
+            <a href="/about" class="flexItems">About</a>
+        </div>
+        <div id="file-overview">
+            <h2>Debug page</h2>
+            <h4>Available log files</h4>
+            <table border="1" cellpadding="5" cellspacing="5">
+                <thead>
+                    <tr>
+                        <th>Log Files</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for file in files %}
+                    <tr>
+                        <td><a href="/debug?file={{file}}">{{file}}</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <textarea id="text-content" readonly>{{content}}</textarea>
+</html>

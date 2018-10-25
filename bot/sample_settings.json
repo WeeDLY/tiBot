@@ -1,0 +1,35 @@
+{
+    "overall":{
+        "runTweetThread":true,
+        "runFollowThread":true,
+        "database":"tiBot.db",
+        "backupDatabase":"db_backup"
+    },
+    "logger":{
+        "logFileName":"tiBot",
+        "lOGGER_PRINT_LEVEL":"info",
+        "logFolder":"logs",
+        "logSize":3000
+    },
+    "twitter":{
+        "consumerKey":"<CONSUMER_KEY>",
+        "consumerSecret":"<CONSUMER_SECRET>",
+        "accessToken":"<ACCESS_TOKEN>",
+        "accessSecret":"<ACCESS_SECRET>",
+        "twitterName":"<TWITTER_NAME>",
+        "tempFile":"<TEMP_FILE>",
+        "hashTags":["#example", "#hashtags"],
+        "followTweets":[20, 50000],
+        "followFriends":[25, 2000],
+        "followFollowers":[30, 2000],
+        "followFavorites":[0, 500],
+        "updateStatHour":"00",
+        "updateTweetAfter":[1, 0],
+        "followNewPerson":[0, 6],
+        "unfollowPersonAfter":[99, 0]
+    },
+    "imgur":{
+        "clientId":"<CLIENT_ID>",
+        "tags":["EXAMPLE_TAG"]
+    }
+}

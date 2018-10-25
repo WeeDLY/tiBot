@@ -1,0 +1,78 @@
+<html lang="en">
+    <head>
+        <script src='static/Chart.min.js'></script>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="../static/main_style.css" />
+    </head>
+    <body>
+        <h1>tiBot @{{twitterName}}</h1>
+        <div id="menu-container">
+            <a href="/" class="flexItems">Home</a>
+            <a href="/query" class="flexItems">Query</a>
+            <a href="/debug" class="flexItems">Debug</a>
+            <a href="/about" class="flexItems">About</a>
+        </div>
+
+        </div>
+        <div id="container">
+            <div class="flexItems" id="overall">
+                <h2>Overall</h2>
+                <p>Current time: {{currentTime}}</p>
+                <p>Twitter name: {{twitterName}}</p>
+                <p>Bot currently running: {{botRuntime}}</p>
+                <p>Last tweet: {{lastTweet}}</p>
+            </div>
+            <div class="flexItems" id="ProfileOverview">
+                <h2>Profile Overview</h2>
+                <p>Tweets: {{tweets}}</p>
+                <p>Following: {{following}}</p>
+                <p>Followers: {{followers}}</p>
+                <p>Likes: {{likes}}</p>
+            </div>
+            <div class="flexItems" id="Total">
+                <h2>Total</h2>
+                <p>Retweets: {{retweets}}</p>
+                <p>Tweet likes: {{tweetLikes}}</p>
+                <p>Retweet last week: {{retweetsLastWeek}}</p>
+                <p>Tweet likes last week: {{tweetLikesLastWeek}}</p>
+            </div>
+        </div>
+        <canvas id="chart"></canvas>
+    </body>
+        <!-- Script for the chart -->
+        <script>
+                // bar chart data
+                var barData = {
+                labels : [{% for item in labels %}
+                                "{{item}}",
+                            {% endfor %}],
+                datasets : [
+                    {
+                            fillColor: "rgba(151,187,205,0.2)",
+                            strokeColor: "rgba(151,187,205,1)",
+                            pointColor: "rgba(151,187,205,1)",
+                        data : [{% for item in values %}
+                                    {{item}},
+                                    {% endfor %}]
+                    }
+                    ]
+                }
+                
+                // get bar chart canvas
+                var mychart = document.getElementById("chart").getContext("2d");
+                
+                steps = 10
+                max = 150
+                // draw bar chart
+                new Chart(mychart).Bar(barData, {
+                        scaleOverride: true,
+                        scaleSteps: steps,
+                        scaleStepWidth: Math.ceil(max / steps),
+                        scaleStartValue: 150,
+                        scaleShowVerticalLines: true,
+                        scaleShowGridLines : true,
+                        barShowStroke : true,
+                        scaleShowLabels: true
+                });
+        </script>
+</html>
