@@ -33,6 +33,8 @@ def start(log, setting, db, twit, imgr):
 def maintenance(log, setting, db, twit, imgr, tweetThread, followThread):
     timePast = 0
     lastUpdateDay = None
+    runTweetThread = setting.runTweetThread
+    runFollowThread = setting.runFollowThread
     while setting.runBot:
         # Updates twitter statistics to database
         if time.strftime("%H") == setting.updateStatHour:
@@ -64,8 +66,8 @@ def maintenance(log, setting, db, twit, imgr, tweetThread, followThread):
         if tweetThread.is_alive() is False and followThread.is_alive() is False:
             shutdown = False
             log.log(logger.LogLevel.CRITICAL, 'Shutting down and restarting')
-            setting.runTweetThread = True
-            setting.runFollowThread = True
+            setting.runTweetThread = runTweetThread
+            setting.runFollowThread = runFollowThread
             setting.runBot = True
             startup.startup(setting.settingsFile)            
 
