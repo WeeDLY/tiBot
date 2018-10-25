@@ -9,7 +9,7 @@ app = Flask(__name__)
 twitterName = None
 database = None
 logFolder = None
-connection = sqlite3.connect(database, check_same_thread=False)
+connection = None
 chartColumns = 14
 
 
@@ -149,6 +149,7 @@ def read_settings(settingsFile):
         twitterName = data["twitterName"]
         database = data["database"]
         logFolder = data["logFolder"]
+        sqlite3.connect(database, check_same_thread=False)
         print('Loaded settings')
     except Exception as e:
         print(e)
