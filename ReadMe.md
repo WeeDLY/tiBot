@@ -58,7 +58,7 @@ General information, such as:
 2. Twitter name
 3. Runtime
 4. Last tweet
-5. + General twitter statistics etc..
+5. General twitter statistics, etc, etc..
 
 ### Settings.json
     twitterName: Name of your twitter user
