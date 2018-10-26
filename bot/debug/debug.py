@@ -26,6 +26,8 @@ def debug(log, setting, db, twit, imgr):
             twitter_mode(log, db, twit)
         elif cmd == 'imgur':
             imgur_mode(log, setting, imgr)
+        elif cmd == 'help':
+            debug_commands()
         elif cmd == 'e' or cmd == 'q':
             debugMode = False
 
@@ -34,7 +36,7 @@ def imgur_mode(log, setting, imgr):
     while debugImgur:
         cmd = input('imgur $ ')
         cmd = cmd.lower()
-        if cmd == 'e':
+        if cmd == 'e' or cmd == 'q':
             debugImgur = False
         elif cmd == 'test tag':
             imgr.print_post('meme')
@@ -63,7 +65,7 @@ def twitter_mode(log, db, twit):
     while debugTwitter:
         cmd = input('twitter $ ')
         cmd = cmd.lower()
-        if cmd == 'e':
+        if cmd == 'e' or cmd == 'q':
             debugTwitter = False
         elif cmd == 'test tweet':
             testPost = imgur.Post('1Gyav', 'Online gaming in a nutshell', imgur.MediaType.IMAGE, 'https://i.imgur.com/LLqrC7R.jpg', 1000, 'aww', 0, 0, 0)
@@ -109,9 +111,11 @@ def twitter_mode(log, db, twit):
 def database_mode(log, setting, db):
     debugDatabase = True
     while debugDatabase:
-        cmd = input('database $ ')
+        cmd = input('database : query $ ')
         cmd = cmd.lower()
-        if cmd == 'print database':
+        if cmd == 'e' or cmd == 'q':
+            debugDatabase = False
+        elif cmd == 'print database':
             db.database_dump()
         elif cmd == 'print stats':
             db.database_table_dump(query.TABLE_STATS)
@@ -121,8 +125,6 @@ def database_mode(log, setting, db):
             db.database_table_dump(query.TABLE_POSTS)
         elif cmd == 'print follows':
             db.database_table_dump(query.TABLE_FOLLOWS)
-        elif cmd == 'e':
-            debugDatabase = False
         elif cmd == 'print tweets update':
             endDate = datetime.datetime.now() - setting.updateTweetAfter
             tweetList = db.query_fetchall(query.QUERY_GET_TWEET_UPDATE_QUEUE(), (endDate, ))
@@ -133,21 +135,20 @@ def database_mode(log, setting, db):
             personList = db.query_fetchall(query.QUERY_GET_FOLLOWS_UPDATE_QUEUE(), (endDate, ))
             for person in personList:
                 print(person)
-        elif cmd == 'query':
-            queryMode = True
-            while queryMode:
-                q = input('database : query $ ')
-                if q == 'e':
+        elif cmd == 'commit':
+            commitMode = True
+            while commitMode:
+                query = input('database : query-commit $ ')
+                if query == 'e' or query == 'q':
                     queryMode = False
                     break
-                elif q == 'commit':
-                    query = input('database : query-commit $ ')
+                else:
                     res = db.query_commit(query)
                     print(res)
-                else:
-                    results = db.query_fetchall(q)
-                    for result in results:
-                        print(result)
+        else:
+            results = db.query_fetchall(cmd)
+            for result in results:
+                print(result)
                 
 
 def debug_commands():
