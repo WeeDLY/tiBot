@@ -255,3 +255,15 @@ class Twitter():
         except Exception as e:
             self.log.log(logger.LogLevel.ERROR, "twitter.search(%s): %s" % (q, e))
             return None
+    
+    def get_mentions(self, include_entities = False):
+        """ Currently only used for debugging. Not actually in use.
+            Equivelent of https://twitter.com/mentions. So it does not retrieve people who follow you sadly :( 
+        """
+        try:
+            r = self.api.request('statuses/mentions_timeline', {'include_entities': include_entities})
+            if r.status_code == 200:
+                return r.text
+        except Exception as e:
+            print(e)
+            return None

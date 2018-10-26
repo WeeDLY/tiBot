@@ -106,6 +106,9 @@ def twitter_mode(log, db, twit):
             favorites, retweets = twit.get_tweet_stats('971765181230481409')
             print(favorites)
             print(retweets)
+        elif cmd == 'get mentions':
+            res = twit.get_mentions()
+            print(res)
             
 
 def database_mode(log, setting, db):
