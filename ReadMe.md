@@ -37,11 +37,11 @@ Everything the bot does, will be logged.
         twitterName: twitter name
         tempFile: temporary file to store images/mp4 before it gets uploaded to twitter. Do not include extension.
         hashTags: Array of hash tags. It will randomize hashtags based on this array.
-            Criterias for you to follow a person
-            followTweets: Amount of tweets the person has to have. Min and max value.
-            followFriends: Amount of people the person is following. Min and max value.
-            followFollowers: Amount of followers the person has. Min and max value.
-            followFavorites: Amounf of likes the person has. Min and max value.
+        Criterias for you to follow a person. All are arrays with 2 values (min, max)
+            followTweets: Amount of tweets the person has to have.
+            followFriends: Amount of people the person is following.
+            followFollowers: Amount of followers the person has.
+            followFavorites: Amounf of likes the person has.
         updateStatHour: The time of hour when stats are updated
         updateTweetAfter: Array with 2 values. Days and hours. Amount of time, untill a statistics of a tweet is updated.
         followNewPerson: How often a new person is followed. Array with 2 values, days and hours.
