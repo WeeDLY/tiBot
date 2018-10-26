@@ -19,7 +19,33 @@ Everything from posts, statistics will be stored in a sqlite database.
 Everything the bot does, will be logged.
 
 ### Settings.json
-TODO: Write about settings.json file
+    overall:
+        runTweetThread: true/false disabling the bot tweeting
+        runFollowThread: true/false disabling the bot following/unfollowing people
+        database: location for the database
+        backupDatabase: folder in which the database backups are stored. Takes backup everyday at midnight. Does not take backup if folder is empty.
+    logger:
+        logFileName: name for the log files, do not include extension.
+        lOGGER_PRINT_LEVEL: Level that is printed to console(everything is logged). Options are: debug, info, warning, error, critical.
+        logFolder: Folder for the log files
+        logSize: Max size of a single log file.
+    twitter:
+        consumerKey: twitter consumer key
+        consumerSecret: twitter consumer secret
+        accessToken: twitter access token
+        accessSecret: twitter access secret
+        twitterName: twitter name
+        tempFile: temporary file to store images/mp4 before it gets uploaded to twitter. Do not include extension.
+        hashTags: Array of hash tags. It will randomize hashtags based on this array.
+            Criterias for you to follow a person
+            followTweets: Amount of tweets the person has to have. Min and max value.
+            followFriends: Amount of people the person is following. Min and max value.
+            followFollowers: Amount of followers the person has. Min and max value.
+            followFavorites: Amounf of likes the person has. Min and max value.
+        updateStatHour: The time of hour when stats are updated
+        updateTweetAfter: Array with 2 values. Days and hours. Amount of time, untill a statistics of a tweet is updated.
+        followNewPerson: How often a new person is followed. Array with 2 values, days and hours.
+        unfollowPersonAfter: How long time after following a person, you unfollow them. Array with 2 values, days and hours.
 
 ## Server
 Python flask server.
@@ -34,6 +60,10 @@ General information, such as:
 4. Last tweet
 5. + General twitter statistics..
 
+### Settings.json
+    twitterName: Name of your twitter user
+    database: Location of your bot's database
+    logFolder: Folder location of your bot's log folder
 
 ### Query
 Can query the database directly and fetch the result.
