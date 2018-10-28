@@ -22,9 +22,12 @@ class TwitterAccount():
 def run(log, setting, db, twit, imgr):
     log.log(logger.LogLevel.INFO, 'follow_thread.run is now running: %s' % setting.runFollowThread)
     while setting.runFollowThread:
+        log.log(logger.LogLevel.INFO, 'follow_thread.run() sleeping for: %d' % setting.followNewPerson.total_seconds())
+        time.sleep(setting.followNewPerson.total_seconds())
+
         # Find a person
-        q = get_search_q(setting)
-        result = twit.search(q, 100)
+        q = get_search_q(setting) # Gets a random hashtag as search parameter for finding a follower
+        result = twit.search(q, 100) # Get 100persons I can potentially follow
         person = None
         if result is None:
             log.log(logger.LogLevel.WARNING, 'follow_thread.run: No result when searching \'%s\'' % q)
@@ -60,9 +63,7 @@ def run(log, setting, db, twit, imgr):
                     unfollow_in_db(log, db, screenName)
                 else:
                     log.log(logger.LogLevel.ERROR, 'Failed to unfollow a person that exists: %s' % screenName)
-
-        log.log(logger.LogLevel.INFO, 'follow_thread.run() sleeping for: %d' % setting.followNewPerson.total_seconds())
-        time.sleep(setting.followNewPerson.total_seconds())
+    # Outside while loop
     log.log(logger.LogLevel.CRITICAL, 'follow_thread.run is not running anymore: %s' % self.setting.runFollowThread)
 
 def unfollow_in_db(log, db, screenName):
@@ -102,9 +103,10 @@ def get_person_list(r):
         friends_count = status['user']['friends_count']
         favourites_count = status['user']['favourites_count']
         statuses_count = status['user']['statuses_count']
-        a = TwitterAccount(screen_name, followers, friends_count, favourites_count, statuses_count)
-        personList.append(a)
+        person = TwitterAccount(screen_name, followers, friends_count, favourites_count, statuses_count)
+        personList.append(person)
     return set(personList)
 
 def get_search_q(setting):
+    """ returns a random hashtag """
     return setting.hashTags[random.randint(0, len(setting.hashTags) - 1)]
