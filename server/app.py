@@ -120,10 +120,14 @@ def get_files(folder):
     files = glob.glob('%s/*' % folder)
     return [file.replace(folder, "") for file in files]
 
-def read_content(file):
+def read_content(file, reversed=True):
+    """ read and returns content from a file """
     try:
         with open(file, 'r') as f:
-            return f.read()
+            if reversed:
+                return ''.join(reversed(f.read()))
+            else:
+                return f.read()
     except:
         return "._."
 
