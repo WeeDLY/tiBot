@@ -79,7 +79,7 @@ class TweetThread():
         hashTags = self.get_hashtags(self.setting.hashTags)
         trend = self.twit.get_trend()
         if trend is not None:
-            hashTags.append(trend)
+            hashTags += " %s" %trend
 
         if post.mediaType == imgur.MediaType.IMAGE.value:
             media = self.download_image(self.log, post.media)
