@@ -267,3 +267,20 @@ class Twitter():
         except Exception as e:
             print(e)
             return None
+    
+    def get_trend(self):
+        """ get top trend based on a location. id: 23424977 = United States """
+        try:
+            r = self.api.request('trends/place', {'id':23424977})
+            if r.status_code == 200:
+                for i in range(50):
+                    trend = r.json()[0]['trends'][i]['name']
+                    if ' ' in trend:
+                        continue
+                    if trend[0] != "#":
+                        trend = "#%s" % trend
+                    return trend
+            self.log.log(logger.LogLevel.WARNING, "Could not get trend w/o space in name")
+        except Exception as e:
+            self.log.log(logger.LogLevel.ERROR, "twitter.get_trend: %s" % e)
+            return None

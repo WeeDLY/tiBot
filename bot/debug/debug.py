@@ -109,6 +109,9 @@ def twitter_mode(log, db, twit):
         elif cmd == 'get mentions':
             res = twit.get_mentions()
             print(res)
+        elif cmd == 'get trend':
+            res = twit.get_trend()
+            print(res)
             
 
 def database_mode(log, setting, db):
