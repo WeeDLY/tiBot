@@ -80,17 +80,36 @@ def get_bot_running():
     ps.wait()
     return ''.join(out.split())
 
-@app.route("/stats")
+@app.route("/stats", methods=["POST", "GET"])
 def stats():
+    values = []
+    labels = []
     if request.method == "GET":
-        values = []
-        labels = []
         return render_template("stats.html", twitterName=twitterName, values=values, labels=labels)
     
     table = request.form["select-table"]
     column = request.form["select-column"]
+    dateColumn = ""
+    if table == 'stats':
+        dateColumn = "lastUpdate"
+    elif table == "tweets":
+        dateColumn = "tweetDate"
+    elif table == "follows":
+        dateColumn = "followDate"
+    
     print(table)
     print(column)
+    entries = 7
+    #query = 'SELECT sum(<column>), <dateColumn> FROM <table> group by DATE_FORMAT(<dateColumn>, "%Y%m%d")'
+    query = 'SELECT SUM(?), ? FROM ? group by DATE_FORMAT(?, "%Y%m%d") LIMIT %s' % entries
+    cur = connection.cursor()
+    cur.execute(query, (column, dateColumn, table, dateColumn, ))
+    result = cur.fetchall()
+    for res, date in result:
+        labels.append(date.strftime("%d/%m/%y"))
+        values.append(res)
+    labels.reverse()
+    values.reverse()
 
     return render_template("stats.html", twitterName=twitterName, values=values, labels=labels)
 
