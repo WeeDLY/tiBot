@@ -101,9 +101,9 @@ def stats():
     print(column)
     entries = 7
     #query = 'SELECT sum(<column>), <dateColumn> FROM <table> group by DATE_FORMAT(<dateColumn>, "%Y%m%d")'
-    query = 'SELECT SUM(?), ? FROM ? group by DATE_FORMAT(?, "%Y%m%d") LIMIT %s' % entries
+    query = "SELECT %s, %s FROM %s LIMIT %d" % (column, dateColumn, table, entries)
     cur = connection.cursor()
-    cur.execute(query, (column, dateColumn, table, dateColumn, ))
+    cur.execute(query)
     result = cur.fetchall()
     for res, date in result:
         labels.append(date.strftime("%d/%m/%y"))
