@@ -82,9 +82,17 @@ def get_bot_running():
 
 @app.route("/stats")
 def stats():
+    if request.method == "GET":
+        values = []
+        labels = []
+        return render_template("stats.html", twitterName=twitterName, values=values, labels=labels)
     
+    table = request.form["select-table"]
+    column = request.form["select-column"]
+    print(table)
+    print(column)
 
-    return render_template("stats.html", twitterName=twitterName)
+    return render_template("stats.html", twitterName=twitterName, values=values, labels=labels)
 
 @app.route("/query", methods=["POST", "GET"])
 def query():

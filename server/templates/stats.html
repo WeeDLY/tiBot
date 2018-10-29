@@ -59,7 +59,7 @@
             <h2>Settings</h2>
             <div class="select">
                 Table:
-                <select id="select-table">
+                <select id="select-table" name="select-table">
                     <option value="stats">Stats</option>
                     <option value="tweets">Tweets</option>
                     <option value="posts">Posts</option>
@@ -69,7 +69,7 @@
 
             <div class="select">
                 Column:
-                <select id="select-column">
+                <select id="select-column" name="select-column">
                 </select>
             </div>
 
@@ -77,6 +77,41 @@
         </form>
 
         <div id="graph">
-            <p>Graph</p>
+                    <!-- Script for the chart -->
+        <script>
+                // bar chart data
+                var barData = {
+                labels : [{% for item in labels %}
+                                "{{item}}",
+                            {% endfor %}],
+                datasets : [
+                    {
+                            fillColor: "rgba(151,187,205,0.2)",
+                            strokeColor: "rgba(151,187,205,1)",
+                            pointColor: "rgba(151,187,205,1)",
+                        data : [{% for item in values %}
+                                    {{item}},
+                                    {% endfor %}]
+                    }
+                    ]
+                }
+                
+                // get bar chart canvas
+                var mychart = document.getElementById("chart").getContext("2d");
+                
+                steps = 10
+                max = 150
+                // draw bar chart
+                new Chart(mychart).Bar(barData, {
+                        scaleOverride: true,
+                        scaleSteps: steps,
+                        scaleStepWidth: Math.ceil(max / steps),
+                        scaleStartValue: 150,
+                        scaleShowVerticalLines: true,
+                        scaleShowGridLines : true,
+                        barShowStroke : true,
+                        scaleShowLabels: true
+                });
+        </script>
         </div>
 </html>
