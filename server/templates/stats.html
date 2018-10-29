@@ -1,6 +1,9 @@
 <html lang="en">
     <head>
         <script src='static/Chart.min.js'></script>
+        <script src='static/stats_helper.js'></script>
+        <!-- temporary for testing on desktop PC -->
+        <script src='D:\code\python\tiBot\server\static/stats_helper.js'></script>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="../static/main_style.css" />
         <style>
@@ -38,6 +41,9 @@
             th{
                 color: #f7882f;
             }
+            .select{
+                text-align: center;
+            }
             </style>
     </head>
     <body>
@@ -49,11 +55,26 @@
             <a href="/debug" class="flexItems">Debug</a>
             <a href="/about" class="flexItems">About</a>
         </div>
-        <div id="graph-settings">
+        <form action="/stats", method="post" id="graph-settings">
             <h2>Settings</h2>
-            <h4>example</h4>
-            
-        </div>
+            <div class="select">
+                Table:
+                <select id="select-table">
+                    <option value="stats">Stats</option>
+                    <option value="tweets">Tweets</option>
+                    <option value="posts">Posts</option>
+                    <option value="follows">Follows</option>
+                </select>
+            </div>
+
+            <div class="select">
+                Column:
+                <select id="select-column">
+                </select>
+            </div>
+
+            <button type="submit" id="btnSubmit">Go!</button>
+        </form>
 
         <div id="graph">
             <p>Graph</p>
