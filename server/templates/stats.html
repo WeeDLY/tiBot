@@ -4,25 +4,24 @@
         <meta charset="utf-8" />
         <link rel="stylesheet" href="../static/main_style.css" />
         <style>
-            #file-overview{
+            #graph-settings{
                 align-content: center;
                 align-self: center;
                 float: left;
                 border: solid 1px #4cdef5;
-                height: 70%;
-                width: 18%;
+                height: 80%;
+                width: 15%;
                 margin-left: 8px;
                 color:#f7ef6a;
             }
             h4{
                 text-align: center;
             }
-            #text-content{
+            #graph{
                 align-content: center;
                 align-self: center;
-                padding: 1%;
                 border: solid 1px #4cdef5;
-                height: 70%;
+                height: 80%;
                 width: 80%;
                 color:#f7ef6a;
                 background-color: #1d2731;
@@ -50,23 +49,13 @@
             <a href="/debug" class="flexItems">Debug</a>
             <a href="/about" class="flexItems">About</a>
         </div>
-        <div id="file-overview">
-            <h2>Debug page</h2>
-            <h4>Available log files</h4>
-            <table border="1" cellpadding="5" cellspacing="5">
-                <thead>
-                    <tr>
-                        <th>Log Files</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for file in files %}
-                    <tr>
-                        <td><a href="/debug?file={{file}}">{{file}}</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <div id="graph-settings">
+            <h2>Settings</h2>
+            <h4>example</h4>
+            
         </div>
-        <textarea id="text-content" readonly>{{content}}</textarea>
+
+        <div id="graph">
+            <p>Graph</p>
+        </div>
 </html>

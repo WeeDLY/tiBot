@@ -80,6 +80,12 @@ def get_bot_running():
     ps.wait()
     return ''.join(out.split())
 
+@app.route("/stats")
+def stats():
+    
+
+    return render_template("stats.html", twitterName=twitterName)
+
 @app.route("/query", methods=["POST", "GET"])
 def query():
     result = []
