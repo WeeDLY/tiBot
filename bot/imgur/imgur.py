@@ -58,6 +58,7 @@ class Imgur():
                         postList.append(p)
             except Exception as e:
                 self.logger.log(logger.LogLevel.CRITICAL, 'imgur.get_posts exception(%s): %s' % (tag, e))
+                break
         return postList
     
     def get_media_type(self, media):
