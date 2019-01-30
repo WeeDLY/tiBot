@@ -52,10 +52,13 @@ def root():
 
     botRuntime = get_bot_running()
 
+    startValue = round_down(min(values))
+    maxValue = round_up(max(values)) - startValue
+    steps = 10
     return render_template('main_page.html', twitterName=twitterName, currentTime=currentTime, botRuntime=botRuntime, lastTweet=lastTweet, 
                             tweets=tweets, following=following, followers=followers, likes=likes,
                             retweets=retweets, tweetLikes=tweetLikes, retweetsLastWeek=retweetsLastWeek, tweetLikesLastWeek=tweetLikesLastWeek,
-                            values=values, labels=labels)
+                            values=values, labels=labels, startValue=startValue, steps=steps, maxValue=maxValue)
 
 def get_runtime(start):
     try:
@@ -194,6 +197,15 @@ def read_settings(settingsFile):
     except Exception as e:
         print(e)
         exit()
+
+def round_up(num, base=50):
+    """ return round up to nearest base """
+    extra = 50 - num % base
+    return num + extra
+
+def round_down(num, base=25):
+    """ return round down to nearest base """
+    return num - num % base
 
 if __name__ == "__main__":
     parse_arguments()
