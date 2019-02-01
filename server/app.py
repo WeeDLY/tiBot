@@ -198,9 +198,9 @@ def read_settings(settingsFile):
         print(e)
         exit()
 
-def round_up(num, base=50):
+def round_up(num, base=25):
     """ return round up to nearest base """
-    extra = 50 - num % base
+    extra = 25 - num % base
     return num + extra
 
 def round_down(num, base=25):
